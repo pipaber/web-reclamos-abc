@@ -4,11 +4,20 @@
 const CLIENTS_API_URL = 'http://52.1.53.185:8000/api/clientes/lookup';
 const CARDS_API_URL = 'https://ugl4isqmt3.execute-api.us-east-1.amazonaws.com/dev/tarjetas/listar';
 const MOVEMENTS_API_URL = 'https://aln4z3dlj1.execute-api.us-east-1.amazonaws.com/transacciones/buscar-cliente';
-// When running locally with `react-scripts start`, use relative paths so
-// the CRA dev server proxy (package.json `proxy`) forwards requests to the
-// backend and avoids CORS issues. In production, use REACT_APP_API_BASE or
-// fall back to the known backend host.
-const API_BASE = process.env.NODE_ENV === 'development'
+// Prefer relative paths when running on localhost so the CRA dev proxy
+// forwards requests to the backend and avoids CORS. This covers typical
+// local workflows where the app is served from http://localhost:3000.
+const isLocalhost = typeof window !== 'undefined' && (
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1' ||
+  // common CRA default port
+  window.location.port === '3000'
+);
+
+// If we are running the app from localhost:3000 use relative paths so the
+// Create React App dev server proxy (package.json proxy) forwards requests
+// and avoids CORS. Otherwise use REACT_APP_API_BASE or a sensible fallback.
+const API_BASE = isLocalhost
   ? ''
   : (process.env.REACT_APP_API_BASE || 'http://13.222.79.184:8001');
 
