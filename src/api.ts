@@ -4,12 +4,17 @@
 const CLIENTS_API_URL = 'http://52.1.53.185:8000/api/clientes/lookup';
 const CARDS_API_URL = 'https://ugl4isqmt3.execute-api.us-east-1.amazonaws.com/dev/tarjetas/listar';
 const MOVEMENTS_API_URL = 'https://aln4z3dlj1.execute-api.us-east-1.amazonaws.com/transacciones/buscar-cliente';
-// Use relative paths for these endpoints so the Create React App dev server
-// proxy (configured in package.json) can forward requests to the real API
-// host and avoid CORS issues during development.
-const CLAIMS_API_URL = '/reclamos/';
-const CLAIM_TYPES_API_URL = '/catalogos/tipos-reclamo';
-const CLAIM_STATUSES_API_URL = '/catalogos/estados-reclamo';
+// When running locally with `react-scripts start`, use relative paths so
+// the CRA dev server proxy (package.json `proxy`) forwards requests to the
+// backend and avoids CORS issues. In production, use REACT_APP_API_BASE or
+// fall back to the known backend host.
+const API_BASE = process.env.NODE_ENV === 'development'
+  ? ''
+  : (process.env.REACT_APP_API_BASE || 'http://13.222.79.184:8001');
+
+const CLAIMS_API_URL = `${API_BASE}/reclamos/`;
+const CLAIM_TYPES_API_URL = `${API_BASE}/catalogos/tipos-reclamo`;
+const CLAIM_STATUSES_API_URL = `${API_BASE}/catalogos/estados-reclamo`;
 
 export const fetchClientIdByDni = async (dni: string) => {
   const response = await fetch(`${CLIENTS_API_URL}?dni=${dni}`);

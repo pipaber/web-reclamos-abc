@@ -1,0 +1,15 @@
+services:
+  web-reclamos-abc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-reclamos-abc:latest
+    container_name: web-reclamos-abc
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    environment:
+      # API_BASE can be set in .env or overridden here
+      - API_BASE=${API_BASE}

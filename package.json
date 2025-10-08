@@ -16,11 +16,13 @@
     "react-dom": "^19.2.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "express": "^4.18.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:prod": "node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -47,4 +49,5 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18"
   }
+
 }
