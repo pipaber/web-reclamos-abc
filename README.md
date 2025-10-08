@@ -121,6 +121,41 @@ REACT_APP_API_BASE=https://api.example.com
 
 Access it in code as `process.env.REACT_APP_API_BASE`.
 
+### Related APIs
+
+The frontend integrates with a small set of backend endpoints. These are typically prefixed by the API base URL (see `REACT_APP_API_BASE` or the `proxy` setting in development).
+
+- `clientes` - Endpoints for managing client/customer records. Typical operations:
+	- GET `/clientes` - list clients
+	- GET `/clientes/:id` - retrieve a single client
+	- POST `/clientes` - create a new client
+	- PUT `/clientes/:id` - update an existing client
+	- DELETE `/clientes/:id` - remove a client
+
+- `cards` - Endpoints for card/payment instruments associated with clients:
+	- GET `/cards` - list cards (optionally filtered by client)
+	- GET `/cards/:id` - details for a specific card
+	- POST `/cards` - add a new card
+	- PUT `/cards/:id` - update card info
+	- DELETE `/cards/:id` - remove a card
+
+- `movements` - Transactional movements or activity logs tied to cards or accounts:
+	- GET `/movements` - list movements (supports pagination & filtering)
+	- GET `/movements/:id` - retrieve movement details
+	- POST `/movements` - create a manual movement (admin operations)
+
+- `claims` - Endpoints for creating and tracking complaints (reclamos):
+	- GET `/claims` - list claims
+	- GET `/claims/:id` - retrieve claim details
+	- POST `/claims` - submit a new claim
+	- PUT `/claims/:id` - update a claim (status, notes)
+
+Notes:
+
+- Authentication and authorization requirements (tokens, headers) depend on the backend implementation. Check the backend API docs or the `Authorization` header handling in the frontend API helper.
+- Use query parameters to support pagination, filtering, and sorting (for example: `/movements?clientId=123&page=2&limit=20`).
+- If the backend provides OpenAPI/Swagger, consider linking to that documentation here for exact schemas and request/response shapes.
+
 ## Testing
 
 Run unit and integration tests with:
